@@ -34,7 +34,6 @@ public class Biblioteca{
                     list.add(x);
                     listaNrPagini.remove(j);
                 }
-
             }
             
             for(int k=0;k<list.size();k++){
