@@ -40,7 +40,5 @@ public class SirSupracrescator{
             }
             System.out.println("RESPINS");
         }
-        
-        
     }
 }
