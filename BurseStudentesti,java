@@ -1,0 +1,73 @@
+import java.util.*;
+public class BurseStudentesti{
+    public static void main(String [] args){
+        Scanner sc = new Scanner(System.in);
+        String line = sc.nextLine();
+        String [] parts = line.split(" ");
+        int nrStudenti = Integer.parseInt(parts[0]);
+        int nrDiscipline = Integer.parseInt(parts[1]);
+        int nrBurseMerit = Integer.parseInt(parts[2]);
+        ArrayList<Integer> listaNote = new ArrayList<Integer>();
+        
+        boolean areBursa = false;
+        String numePerformanta = "" ;
+        double notaPerformanta= 0;
+        int contor=0;
+        
+        for(int i=0; i<nrStudenti; i++)
+        {
+            String numeStud = sc.nextLine();
+            String noteStud = sc.nextLine();
+            String []parts1 = noteStud.split(" ");
+            for(int j=0; j<nrDiscipline; j++)
+            {
+                int x = Integer.parseInt(parts1[j]);
+                listaNote.add(x);
+            }
+            double medie=0;
+            int suma=0;
+            for(Integer l:listaNote)
+            {
+                if(l >= 5){
+                    areBursa=true;
+                    suma = suma + l;
+                }
+                else 
+                {
+                    areBursa = false;
+                    suma = 0;
+                    break;
+                }
+            }
+            if(suma != 0){
+                medie = ((double)(suma))/listaNote.size();
+            }
+            if(medie >= 8)
+            {
+                contor ++;
+                if(notaPerformanta < medie)
+                {
+                    notaPerformanta = medie;
+                    numePerformanta = numeStud;
+                } 
+            }
+            areBursa = false;
+            listaNote.clear();
+            
+        }
+        
+        
+        if(contor!=0 && contor <= nrBurseMerit+1 )
+        {
+            System.out.println(contor-1);
+        }else if(contor > nrBurseMerit+1){
+            System.out.println(nrBurseMerit);
+        }else if(contor==0){
+            System.out.println(contor);
+        }
+        System.out.print(numePerformanta+" ");
+        System.out.printf("%.2f",notaPerformanta);
+        
+    }    
+    
+}
