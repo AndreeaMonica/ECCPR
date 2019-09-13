@@ -1,0 +1,140 @@
+import java.util.*;
+public class WBSadaptiv{
+    public static void main(String [] args){
+        Scanner sc = new Scanner(System.in);
+        int nrElemente = sc.nextInt();
+        int nrElemBloc = sc.nextInt();
+        sc.nextLine();
+        String sir = "";
+        for(int i=0; i< nrElemente; i++)
+        {
+            String bit = sc.nextLine().trim();
+            sir = sir + bit;
+        }
+        String x = codareZerouri(sir,nrElemBloc);
+        String y = codareUnu(sir,nrElemBloc);
+        int lungimeZero = x.length();
+        int lungimeUnu = y.length();
+        double rata;
+        String []parts1 = x.split("");
+        String []parts2 = y.split("");
+        
+       
+        if(lungimeZero > lungimeUnu)
+        {
+            rata = (double)nrElemente/lungimeUnu;
+            System.out.printf("%.2f",rata);
+            System.out.println();
+            for(int i=0; i<y.length(); i++){
+                String a = parts2[i];
+                System.out.println(a);
+            }
+        }
+        else
+        {
+            rata = (double)nrElemente/lungimeZero;
+            System.out.printf("%.2f",rata);
+            System.out.println();
+            for(int i=0; i<x.length(); i++){
+                String a = parts1[i];
+                System.out.println(a);
+            }
+        }
+        
+    }
+    
+    public static String codareZerouri(String sir,int n)
+    {   
+        String duplicate = sir;
+        boolean zero =false;
+        int contor = 0;
+        String sirNou = "";
+        for(int i=0; i<sir.length()/n; i++)
+        {
+            String aux = duplicate.substring(0,n);
+            duplicate = duplicate.substring(n);
+            String [] parts = aux.split("");
+            for(int j=0; j< aux.length(); j++)
+            {
+                int nr= Integer.parseInt(parts[j]);
+                
+                if(nr ==0)
+                {
+                    zero = true;
+                    contor++;
+                } 
+                else 
+                {
+                    zero = false;
+                    break;
+                }
+            }
+            if(contor == aux.length() && zero == true)
+            {
+                aux = "0";
+                contor = 0;
+            }
+            if(zero == false)
+            {
+                aux = "1" + aux;
+                contor = 0;
+            }
+            sirNou = sirNou+aux;
+            if(duplicate.length() < n && duplicate.length() != 0)
+            {
+                aux = duplicate.substring(0,duplicate.length());
+                aux = "1"+aux; 
+                sirNou = sirNou+aux;
+            }
+        }
+        return "0" + sirNou;
+    }
+
+    public static String codareUnu(String sir,int n)
+    {   
+        String duplicate = sir;
+        int contor=0;
+        String sirNou = "";
+        for(int i=0; i<sir.length()/n; i++)
+        {
+            String aux = duplicate.substring(0,n);
+           
+            duplicate = duplicate.substring(n);
+            String [] parts = aux.split("");
+            boolean unu = false;
+            for(int j=0; j< aux.length(); j++)
+            {
+                int nr= Integer.parseInt(parts[j]);
+                
+                if(nr == 1)
+                {
+                    unu = true;
+                    contor++;
+                } 
+                else break;
+                    
+            }
+            if(contor == aux.length() && unu == true)
+                {
+                    aux = "1";
+                    contor = 0;
+                    unu = false;
+                }
+            else{
+                    aux = "0"+ aux; 
+                    contor = 0;
+                    unu = false;
+                }
+            sirNou = sirNou+aux;
+            
+            if(duplicate.length() < n && duplicate.length()!=0)
+            {
+                aux = duplicate.substring(0,duplicate.length());
+                aux = "0" + aux; 
+                sirNou = sirNou+aux;
+            }
+        }
+        return "1"+sirNou;
+        
+    }
+}
